@@ -1,3 +1,4 @@
+
 let nxt = document.getElementById("next");
 let prv = document.getElementById("prev");
 let img = document.getElementById("slid");
@@ -10,7 +11,6 @@ let Slider = {
     Alt: ["Mercedes", "Bmw2", "Auidi", "Bmw4", "Rang Rover"],
 }
 let Take = Slider.Images.length;
-
 function Move() {
     plusX += 8;
     if (plusX <= 800) {
@@ -19,7 +19,6 @@ function Move() {
         plusX = 0;
     }
 }
-
 function Change(x) {
     img.src = `img/${x}`;
 }
@@ -30,7 +29,8 @@ function ChangeAlt(x) {
     img.alt = `${x}`;
 }
 
-let i = 1;
+let i = 0;
+Change(Slider.Images[i]);
 function Key(e) {
     e = e || window.event;
     if (e.keyCode == "39") {
@@ -70,11 +70,11 @@ nxt.onclick = function () {
 function Next() {
     plusX = 0;
     Move();
-    if (i < Take) {
+    if (i < Take-1) {
+        i++;
         Change(Slider.Images[i]);
         ChangeTitle(Slider.Title[i]);
         ChangeAlt(Slider.Alt[i]);
-        i++;
         onkeydown = Key;
     }
     else {
@@ -88,10 +88,10 @@ function Prev() {
     plusX = 0;
     Move();
     if (i == 0) {
+        i = Take - 1;
         Change(Slider.Images[i]);
         ChangeTitle(Slider.Title[i]);
         ChangeAlt(Slider.Alt[i]);
-        i = Take - 1;
         onkeydown = Key;
     }
     else {
